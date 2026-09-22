@@ -1,0 +1,7 @@
+# Extra packages for the Serverless Docker image ONLY.
+#
+# The lmsysorg/sglang base image already ships sglang, torch, transformers and
+# the CUDA kernels -- reinstalling them here would bloat the image and risk
+# breaking the version match the base image guarantees. So this file holds just
+# the one thing the base image lacks.
+runpod>=1.7,<2

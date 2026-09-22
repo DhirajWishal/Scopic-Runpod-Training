@@ -1,0 +1,16 @@
+# Dependencies for the GPU Pod path (scripts/bootstrap.sh) and for testing the
+# handler locally on a GPU box. Install on Linux + NVIDIA, not on Windows.
+#
+#   pip install -r requirements.txt
+#
+# The Serverless image does NOT use this file -- it inherits sglang and torch
+# from the lmsysorg/sglang base image and installs only requirements-worker.txt.
+
+# "sglang[all]" pulls the full inference runtime: torch, transformers, flashinfer,
+# the CUDA kernels, etc. The bare "sglang" package is only the python shim and
+# cannot actually serve a model.
+sglang[all]==0.5.2
+
+# RunPod SDK -- lets you run `python source/handler.py` locally against
+# test_input.json before you build and push the image.
+runpod>=1.7,<2

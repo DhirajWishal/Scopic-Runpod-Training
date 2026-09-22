@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.py[cod]
+
+# Secrets and machine-local config
+.env
+
+# Model weights / HF cache, if anything ever lands in the repo dir
+.cache/
+models/
+*.safetensors
+*.gguf

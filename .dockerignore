@@ -1,0 +1,10 @@
+# Keep the build context tiny -- everything here would otherwise be uploaded to
+# the Docker daemon on every build.
+.venv/
+**/__pycache__/
+**/*.pyc
+.git/
+.env
+*.md
+scripts/
+graphify-out/

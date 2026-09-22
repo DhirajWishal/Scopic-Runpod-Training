@@ -1,0 +1,13 @@
+{
+  "input": {
+    "messages": [
+      { "role": "system", "content": "You are a concise, helpful assistant." },
+      { "role": "user", "content": "In two sentences, what is a KV cache?" }
+    ],
+    "sampling_params": {
+      "temperature": 0.7,
+      "max_new_tokens": 128
+    },
+    "stream": false
+  }
+}
