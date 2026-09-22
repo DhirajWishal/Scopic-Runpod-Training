@@ -6,10 +6,12 @@
 # is the part that's painful to assemble by hand -- `pip install sglang[all]`
 # into a generic image routinely picks incompatible wheel builds.
 #
-# Tag choice: SGLang 0.5.2 publishes cu126, cu128-b200 and cu129-*b200 variants.
-# There is NO v0.5.2-cu124. cu126 is the general-purpose one and runs on RunPod's
-# A4000 / 4090 / A100 / L40S fleet. Use a -b200 tag only if you target B200/GB200.
-FROM lmsysorg/sglang:v0.5.2-cu126
+# Tag choice: v0.5.20 publishes exactly one CUDA variant, cu130. v0.5.19 is the
+# last release with a cu129 build -- drop back to it if the target GPU's driver
+# is too old for CUDA 13. This must stay in step with the sglang pin in
+# requirements.txt, or the Pod and Serverless paths serve different runtimes.
+# Pinned this high because Ministral 3 needs sglang >= 0.5.16; see requirements.txt.
+FROM lmsysorg/sglang:v0.5.20-cu130
 
 # The base image may define its own ENTRYPOINT (it's built to launch SGLang's
 # HTTP server). Clearing it guarantees our CMD below is what actually runs

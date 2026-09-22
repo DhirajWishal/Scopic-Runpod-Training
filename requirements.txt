@@ -9,7 +9,16 @@
 # "sglang[all]" pulls the full inference runtime: torch, transformers, flashinfer,
 # the CUDA kernels, etc. The bare "sglang" package is only the python shim and
 # cannot actually serve a model.
-sglang[all]==0.5.2
+#
+# Version floor is set by the model, not by preference. Ministral 3 needs:
+#   - transformers >= 5.x for the "ministral3" config type (absent in 4.57.1,
+#     which is what sglang 0.5.8 pins -- that combination KeyErrors on load)
+#   - sglang >= 0.5.7 for the architecture at all, and >= 0.5.16 for the YaRN
+#     RoPE fix; this model's config uses rope_type=yarn, so below 0.5.16 it
+#     loads but generates subtly wrong output.
+# 0.5.20 additionally routes FP8 linear layers better on SM120, which matters
+# because these weights ship fp8-quantised.
+sglang[all]==0.5.20
 
 # RunPod SDK -- lets you run `python source/handler.py` locally against
 # test_input.json before you build and push the image.

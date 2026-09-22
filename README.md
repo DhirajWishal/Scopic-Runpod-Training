@@ -159,10 +159,12 @@ lets enough of them be in flight for that to happen.
 **Streaming chunks are cumulative.** Each chunk's `text` is the full output so
 far, not just the new piece. Both entrypoints diff against what was already sent.
 
-**Base image tag.** SGLang 0.5.2 publishes `cu126`, `cu128-b200` and `cu129-*b200`
-variants — there is no `cu124`. `cu126` is the general-purpose one. If you bump
-the SGLang version, check [the tag list](https://hub.docker.com/r/lmsysorg/sglang/tags)
-rather than assuming a tag exists.
+**Base image tag.** SGLang 0.5.20 publishes only one CUDA variant, `cu130`;
+v0.5.19 is the last release carrying a `cu129` build. The tag must match the
+`sglang` pin in `requirements.txt` so the Pod and Serverless paths run the same
+runtime. If you change the SGLang version, check
+[the tag list](https://hub.docker.com/r/lmsysorg/sglang/tags) rather than
+assuming a tag exists.
 
 **Cold starts.** First request to a scaled-to-zero endpoint pays image pull +
 model load (~1-2 min without a warm volume). Set min workers to 1 if that
