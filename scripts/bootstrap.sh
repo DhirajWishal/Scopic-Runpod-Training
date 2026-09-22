@@ -20,6 +20,15 @@ echo "==> GPU check"
 # If this fails, you're on a CPU-only pod and nothing below will work.
 nvidia-smi
 
+echo "==> System deps"
+# sgl_kernel's compiled extension links against libnuma.so.1, which the RunPod
+# PyTorch templates don't ship (the serverless image gets it from lmsysorg/sglang).
+# This lives here rather than in a one-off manual step because everything outside
+# /workspace is wiped when the pod stops, so it must be reinstalled each session.
+export DEBIAN_FRONTEND=noninteractive
+apt-get update
+apt-get install -y --no-install-recommends libnuma1
+
 echo "==> Python deps"
 python -m pip install --upgrade pip
 pip install -r requirements.txt
