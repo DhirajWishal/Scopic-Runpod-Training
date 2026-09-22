@@ -10,6 +10,10 @@ variable, which means you can change the model or the memory budget from the
 RunPod dashboard without rebuilding the Docker image.
 """
 
+# sglang exposes Engine as a lazy-import proxy, not a real class, so annotations
+# naming it must not be evaluated at runtime.
+from __future__ import annotations
+
 import os
 
 
