@@ -25,7 +25,7 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 
 echo "==> Warming the model cache"
-# Downloads Qwen2.5-0.5B (~1 GB) to /workspace now, so the first real run isn't
+# Downloads the weights (~30 GB) to /workspace now, so the first real run isn't
 # stalled behind it. /workspace is the persistent network volume -- the rest of
 # the pod's disk is wiped when the pod is stopped, so caching anywhere else means
 # re-downloading every session.
@@ -33,7 +33,7 @@ export HF_HOME="${HF_HOME:-/workspace/.cache/huggingface}"
 python -c "
 from huggingface_hub import snapshot_download
 import os
-model = os.environ.get('MODEL_ID', 'mistralai/Ministral-3-14B-Instruct')
+model = os.environ.get('MODEL_ID', 'mistralai/Ministral-3-14B-Instruct-2512')
 print(f'downloading {model} -> {os.environ[\"HF_HOME\"]}')
 snapshot_download(model)
 "

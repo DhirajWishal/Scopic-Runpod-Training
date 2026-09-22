@@ -56,7 +56,7 @@ from transformers import AutoTokenizer  # noqa: E402
 # A Hugging Face repo id, or a local path if you pre-fetched the weights.
 # "-Instruct" matters: the base "Qwen/Qwen2.5-0.5B" is a raw completion model
 # and will not follow chat turns.
-MODEL_ID = os.environ.get("MODEL_ID", "mistralai/Ministral-3-14B-Instruct")
+MODEL_ID = os.environ.get("MODEL_ID", "mistralai/Ministral-3-14B-Instruct-2512")
 
 # Fraction of total GPU memory SGLang reserves up front for weights + KV cache.
 # It grabs this as one big static pool instead of allocating per request.
